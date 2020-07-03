@@ -8,4 +8,4 @@ AWS_REGION=$(curl -s 169.254.169.254/latest/meta-data/placement/availability-zon
 
 ALLOCATION_ID=$(aws ec2 describe-addresses --region=$AWS_REGION --filters "Name=tag:Name,Values=$1" --query 'Addresses[0].AllocationId' | tr -d '"')
 
-aws ec2 associate-address --region $AWS_REGION --allocation-id $ALLOCATION_ID --instance-id $INSTANCE_ID
+aws ec2 associate-address --allow-reassociation --region $AWS_REGION --allocation-id $ALLOCATION_ID --instance-id $INSTANCE_ID
